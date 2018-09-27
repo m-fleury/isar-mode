@@ -261,6 +261,7 @@
     "typedef"
     "types"
     "types_code"
+    "type_synonym"
     "ultimately"
     "undo"
     "undos_proof"
@@ -545,6 +546,7 @@
     "type_notation"
     "typed_print_translation"
     "typedecl"
+    "type_synonym"
     "types"
     "types_code"
     "use"))

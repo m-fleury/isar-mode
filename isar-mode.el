@@ -286,6 +286,7 @@
     "sledgehammer_params"
     "sorry"
     "subgoal"
+    "supply"
     "then"
     "thm"
     "thm_deps"

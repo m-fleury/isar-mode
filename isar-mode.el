@@ -6,7 +6,7 @@
 
 (defvar isar-mode-map
   ()
-  "Keymap for WPDL major mode")
+  "Keymap for isar major mode")
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.thy\\'" . isar-mode))
@@ -60,6 +60,7 @@
     "consts"
     "consts_code"
     "corollary"
+    "context"
     "cpodef"
     "datatype"
     "declaration"
@@ -90,6 +91,7 @@
     "fun"
     "function"
     "global"
+    "global_interpretation"
     "guess"
     "have"
     "header"
@@ -131,6 +133,7 @@
     "nonterminals"
     "normal_form"
     "notation"
+    "notepad"
     "overloading"
     "paragraph"
     "subparagraph"
@@ -198,8 +201,9 @@
     "schematic_theorem"
     "sect"
     "section"
-    "sepref_thm"
     "sepref_definition"
+    "sepref_register"
+    "sepref_thm"
     "setup"
     "shows"
     "simproc_setup"

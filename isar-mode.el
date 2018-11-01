@@ -260,6 +260,7 @@
     "assume"
     "back"
     "by"
+    "consider"
     "define"
     "defer"
     "defer_recdef"

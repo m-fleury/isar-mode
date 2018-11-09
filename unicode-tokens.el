@@ -44,7 +44,6 @@
 (require 'cl)
 (require 'quail)
 
-(require 'maths-menu)		; nuke compile warnings
 ;; Emacs <24 compatibility
 (when (and (fboundp 'flet)
            (not (get 'flet 'byte-obsolete-info)))

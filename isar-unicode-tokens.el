@@ -786,8 +786,8 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("EX"  . "\\<exists>")
     ("!!"  . "\\<And>")
     ("~"  . "\\<not>")
-    ("!"  . "\\<forall>")
-    ("?"  . "\\<exists>")
+    ;("!"  . "\\<forall>") makes it impossible to type ! as in intro!:
+    ;("?"  . "\\<exists>")
     ("(="  . "\\<subseteq>")
     ("__"  . "\\<^sub>")
     ("^^"  . "\\<^sup>")

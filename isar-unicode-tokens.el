@@ -499,7 +499,7 @@
     ("some" "ϵ")
     ("hole" "⌑")
     ("newline" "⏎")
-    ("^comment" "―")
+    ("comment" "―")
     ("^cancel" "⌦")
     ("open" "‹")
     ("close" "›")

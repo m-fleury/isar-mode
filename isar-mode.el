@@ -336,7 +336,7 @@
     (modify-syntax-entry ?=  ".")
     (modify-syntax-entry ?%  ".")
     (modify-syntax-entry ?\& ".")
-    (modify-syntax-entry ?.  "w")
+    ;; (modify-syntax-entry ?.  "w")
     (modify-syntax-entry ?_  "w")
     (modify-syntax-entry ?\' "w")
     (modify-syntax-entry ??  "w")

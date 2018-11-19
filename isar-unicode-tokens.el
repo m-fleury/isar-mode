@@ -499,7 +499,7 @@
     ("some" "ϵ")
     ("hole" "⌑")
     ("newline" "⏎")
-    ("^comment" "―")
+    ("comment" "―")
     ("^cancel" "⌦")
     ("open" "‹")
     ("close" "›")
@@ -762,6 +762,7 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("->" . "\\<rightarrow>")
     ("=>" . "\\<Rightarrow>")
     ("<->" . "\\<leftrightarrow>")
+    ("<-->" . "\\<longleftrightarrow>")
     ("<=>" . "\\<Leftrightarrow>")
     ("|->" . "\\<mapsto>")
     ("<--" . "\\<longleftarrow>")
@@ -784,10 +785,12 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("ALL" . "\\<forall>")
     ("EX"  . "\\<exists>")
     ("!!"  . "\\<And>")
-    ;; TODO: put these into replacement shortcuts, perhaps
-    ;; ("~"  . "\\<not>")
-    ;; ("!"  . "\\<forall>")
-    ;; ("?"  . "\\<exists>")
+    ("~"  . "\\<not>")
+    ;("!"  . "\\<forall>") makes it impossible to type ! as in intro!:
+    ;("?"  . "\\<exists>")
+    ("(="  . "\\<subseteq>")
+    ("__"  . "\\<^sub>")
+    ("^^"  . "\\<^sup>")
     ;; extra misc, switch them off if you don't like them
     ;("|>" . "\\<triangleright>") ; clashes with ML parsing combinator
     ("<|" . "\\<triangleleft>"))

@@ -372,4 +372,7 @@
   (unicode-tokens-mode 1)
   (run-hooks 'isar-mode-hook))
 
+;;spacemacs specific function
+(setq spacemacs-jump-handlers-isar-mode nil)
+
 (provide 'isar-mode)

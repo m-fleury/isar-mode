@@ -326,28 +326,36 @@
 
 (defvar isar-mode-syntax-table
   (let ((st (make-syntax-table)))
-    (modify-syntax-entry ?\" " ")
+    (modify-syntax-entry ?\" " " st)
     (modify-syntax-entry ?_ "w" st)
-    (modify-syntax-entry ?\$ ".")
-    (modify-syntax-entry ?\/ ".")
-    (modify-syntax-entry ?\\ "\\")
-    (modify-syntax-entry ?+  ".")
-    (modify-syntax-entry ?-  ".")
-    (modify-syntax-entry ?=  ".")
-    (modify-syntax-entry ?%  ".")
-    (modify-syntax-entry ?\& ".")
-    ;; (modify-syntax-entry ?.  "w")
-    (modify-syntax-entry ?_  "w")
-    (modify-syntax-entry ?\' "w")
-    (modify-syntax-entry ??  "w")
-    (modify-syntax-entry ?\( "()1")
-    (modify-syntax-entry ?\) ")(4")
-    (modify-syntax-entry ?\{ "(}1b")
-    (modify-syntax-entry ?\} "){4b")
-    (modify-syntax-entry ?\* ". 23n")
+    (modify-syntax-entry ?\$ "." st)
+    (modify-syntax-entry ?\/ "." st)
+    (modify-syntax-entry ?\\ "\\" st)
+    (modify-syntax-entry ?+  "." st)
+    (modify-syntax-entry ?-  "." st)
+    (modify-syntax-entry ?=  "." st)
+    (modify-syntax-entry ?%  "." st)
+    (modify-syntax-entry ?\& "." st)
+    (modify-syntax-entry ?.  "w" st)
+    ;;(modify-syntax-entry ?_  "w" st)
+    (modify-syntax-entry ?\' "w" st)
+    (modify-syntax-entry ??  "w" st)
+    (modify-syntax-entry ?\( "()1" st)
+    (modify-syntax-entry ?\) ")(4" st)
+    (modify-syntax-entry ?\{ "(}1b" st)
+    (modify-syntax-entry ?\} "){4b" st)
+    (modify-syntax-entry ?\* ". 23n" st)
   st)
   "Syntax table for isar-mode")
 
+(defun isar-syntax-propertize (start end)
+  (goto-char start)
+  (funcall
+   (syntax-propertize-rules
+    ("\\((\\)\\(\\*\\)\\()\\)" ;; (*) are not opening comments
+     (1 "w"))
+    )
+   start end))
 
 (defun unicode-tokens-configure ()
   "Set the Unicode Tokens table and initialise."
@@ -358,7 +366,6 @@
   (unicode-tokens-initialise))
 
 
-
 (defun isar-mode ()
   "Major mode for editing isar files"
   (interactive)
@@ -366,9 +373,12 @@
   (set-syntax-table isar-mode-syntax-table)
   (use-local-map isar-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(isar-font-lock-keywords))
+  (set (make-local-variable 'syntax-propertize-function)
+        #'isar-syntax-propertize)
   (unicode-tokens-configure)
   (setq major-mode 'isar-mode)
   (setq isar-name "isar")
+  (setq mode-name "Isar")
   (unicode-tokens-mode 1)
   (run-hooks 'isar-mode-hook))
 

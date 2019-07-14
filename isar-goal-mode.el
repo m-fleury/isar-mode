@@ -5,23 +5,27 @@
   "Keymap for isar major mode")
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("*isar-output" . isar-goal-mode))
+(add-to-list 'auto-mode-alist '("*isar-output*" . isar-goal-mode))
 
 (defvar isar-goal-most-outer-keyword
   (regexp-opt
    '("proof" "prove")))
 
 (defvar isar-goal-outer-keyword
-  (regexp-opt '("goal" "subgoal") t))
+  (regexp-opt '("goal" "subgoal" "consts" "show") t))
 
 (defvar isar-goal-inner-keyword
-  "$^[:digit:]*. ")
+  "$^[:digit:]*.")
 
-(defvar isar-goal-tactics
-  (regexp-opt '("Introduced" "fixed" "type" "variable" "variable(s)") t))
+(defvar isar-goal-tactics ;; warning
+  (regexp-opt '("Introduced" "fixed" "type" "variable" "variable(s)"
+     "Ambiguous" "input""produces" "parse" "trees"
+     "Ignoring" "duplicate" "rewrite" "rule") t))
 
-(defvar isar-goal-minor
-  (regexp-opt '("is") t))
+(defvar isar-goal-minor ;; information
+  (regexp-opt '("is" "Found" "termination" "order" "Proofs" "for" "inductive" "predicate"
+   "Successful" "attempt" "to" "solve" "goal" "by" "exported" "rule" "this" "calculation"
+    "have" "using" "Proof" "outline" "with" "cases") t))
 
 (defconst isar-goal-font-lock-keywords-1
   (list (cons (concat "\\<" isar-goal-outer-keyword "\\>") 'font-lock-builtin-face)

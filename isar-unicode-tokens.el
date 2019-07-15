@@ -775,7 +775,7 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("==>" . "\\<Longrightarrow>")
     ("<==>" . "\\<Longleftrightarrow>")
     ("|-->" . "\\<longmapsto>")
-    ("<->" . "\\<longleftrightarrow>")
+    ("<->" . "\\<leftrightarrow>")
     ("<<" . "\\<guillemotleft>")
     (">>" . "\\<guillemotright>")
     ("<>" . "\\<diamond>")

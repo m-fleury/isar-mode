@@ -765,7 +765,6 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("<=" . "\\<Leftarrow>")
     ("->" . "\\<rightarrow>")
     ("=>" . "\\<Rightarrow>")
-    ("<->" . "\\<leftrightarrow>")
     ("<-->" . "\\<longleftrightarrow>")
     ("<=>" . "\\<Leftrightarrow>")
     ("|->" . "\\<mapsto>")

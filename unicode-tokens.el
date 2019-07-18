@@ -1486,6 +1486,21 @@ Commands available are:
          ])))))))
 
 
+;; prevents evil-escape to be captured as commands by quail in evil-mode
+(defun isar-quail-inhibit-evil-escape (_)
+  (message "pre-advice")
+  (setq evil-escape-inhibit t))
+
+(defun isar-quail-deinhibit-evil-escape (_)
+  (message "post-advice")
+  (run-with-timer 0 nil (lambda () (setq evil-escape-inhibit nil))))
+
+(advice-add 'quail-update-translation
+            :before #'isar-quail-inhibit-evil-escape)
+
+(advice-add 'quail-update-translation
+            :after #'isar-quail-deinhibit-evil-escape
+            )
 
 (provide 'unicode-tokens)
 

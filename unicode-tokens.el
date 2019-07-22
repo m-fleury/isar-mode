@@ -1502,6 +1502,69 @@ Commands available are:
             :after #'isar-quail-deinhibit-evil-escape
             )
 
+(advice-add 'quail-input-string-to-events
+            :after #'isar-quail-deinhibit-evil-escape
+            )
+
+(defun quail-start-translation (key)
+  "Start translation of the typed character KEY by the current Quail package.
+Return the input string."
+  ;; Check the possibility of translating KEY.
+  ;; If KEY is nil, we can anyway start translation.
+  (if (or (and (integerp key)
+               (assq (if (quail-kbd-translate)
+                         (quail-keyboard-translate key) key)
+                     (cdr (quail-map))))
+          (null key))
+      ;; OK, we can start translation.
+      (let* ((echo-keystrokes 0)
+             (help-char nil)
+             (overriding-terminal-local-map (quail-translation-keymap))
+             (generated-events nil)     ;FIXME: What is this?
+             (input-method-function nil)
+             (modified-p (buffer-modified-p))
+             last-command-event last-command this-command)
+        (setq quail-current-key ""
+              quail-current-str ""
+              quail-translating t)
+        (if key
+            (setq unread-command-events (cons key unread-command-events)))
+        (while quail-translating
+          (set-buffer-modified-p modified-p)
+          (quail-show-guidance)
+          (let* ((prompt (if input-method-use-echo-area
+                             (format "%s%s %s"
+                                     (or input-method-previous-message "")
+                                     quail-current-str
+                                     quail-guidance-str)))
+                 (keyseq (read-key-sequence prompt nil nil t))
+                 (cmd (lookup-key (quail-translation-keymap) keyseq)))
+            (if (if key
+                    (and (commandp cmd) (not (eq cmd 'quail-other-command)))
+                  (eq cmd 'quail-self-insert-command))
+                (progn
+                  (setq last-command-event (aref keyseq (1- (length keyseq)))
+                        last-command this-command
+                        this-command cmd)
+                  (setq key t)
+                  (condition-case err
+                      (call-interactively cmd)
+                    (quail-error (message "%s" (cdr err)) (beep))))
+              ;; KEYSEQ is not defined in the translation keymap.
+              ;; Let's return the event(s) to the caller.
+              (setq unread-command-events
+                    (string-to-list (this-single-command-raw-keys)))
+              (setq quail-translating nil))))
+        (quail-delete-region)
+        (isar-quail-inhibit-evil-escape)
+        quail-current-str)
+
+    ;; Since KEY doesn't start any translation, just return it.
+    ;; But translate KEY if necessary.
+    (if (quail-kbd-translate)
+        (setq key (quail-keyboard-translate key)))
+    (char-to-string key)))
+
 (provide 'unicode-tokens)
 
 ;;; unicode-tokens.el ends here

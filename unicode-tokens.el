@@ -1487,11 +1487,11 @@ Commands available are:
 
 
 ;; prevents evil-escape to be captured as commands by quail in evil-mode
-(defun isar-quail-inhibit-evil-escape (_)
+(defun isar-quail-inhibit-evil-escape (&optional _)
   (message "pre-advice")
   (setq evil-escape-inhibit t))
 
-(defun isar-quail-deinhibit-evil-escape (_)
+(defun isar-quail-deinhibit-evil-escape (&optional _)
   (message "post-advice")
   (run-with-timer 0 nil (lambda () (setq evil-escape-inhibit nil))))
 

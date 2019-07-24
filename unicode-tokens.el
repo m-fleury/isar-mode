@@ -1495,12 +1495,12 @@ Commands available are:
   (message "post-advice")
   (run-with-timer 0 nil (lambda () (setq evil-escape-inhibit nil))))
 
-(advice-add 'quail-update-translation
-            :before #'isar-quail-inhibit-evil-escape)
+;; (advice-add 'quail-update-translation
+;;             :before #'isar-quail-inhibit-evil-escape)
 
-(advice-add 'quail-update-translation
-            :after #'isar-quail-deinhibit-evil-escape
-            )
+;; (advice-add 'quail-update-translation
+;;             :after #'isar-quail-deinhibit-evil-escape
+;;             )
 
 (advice-add 'quail-input-string-to-events
             :after #'isar-quail-deinhibit-evil-escape

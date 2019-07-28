@@ -20,7 +20,8 @@
 (defvar isar-goal-tactics ;; warning
   (regexp-opt '("Introduced" "fixed" "type" "variable" "variable(s)"
      "Ambiguous" "input""produces" "parse" "trees"
-     "Ignoring" "duplicate" "rewrite" "rule") t))
+     "Ignoring" "duplicate" "rewrite" "rule" "introduction"
+     "elim" "intro") t))
 
 (defvar isar-goal-minor ;; information
   (regexp-opt '("is" "Found" "termination" "order" "Proofs" "for" "inductive" "predicate"

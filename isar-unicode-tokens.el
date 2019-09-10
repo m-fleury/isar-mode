@@ -775,8 +775,8 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("<==>" . "\\<Longleftrightarrow>")
     ("|-->" . "\\<longmapsto>")
     ("<->" . "\\<leftrightarrow>")
-    ("<<" . "\\<guillemotleft>")
-    (">>" . "\\<guillemotright>")
+    ("<<" . "\\<langle>")
+    (">>" . "\\<rangle>")
     ("<>" . "\\<diamond>")
     ("[|" . "\\<lbrakk>")
     ("|]" . "\\<rbrakk>")
@@ -794,6 +794,7 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("(="  . "\\<subseteq>")
     ("__"  . "\\<^sub>")
     ("^^"  . "\\<^sup>")
+    ("./" . "\\<Down>")
     ;; extra misc, switch them off if you don't like them
     ;("|>" . "\\<triangleright>") ; clashes with ML parsing combinator
     ("<|" . "\\<triangleleft>"))

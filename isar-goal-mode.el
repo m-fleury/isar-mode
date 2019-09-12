@@ -1,3 +1,5 @@
+(require 'isar-mode)
+
 (defvar isar-goal-mode-hook nil)
 
 (defvar isar-goal-mode-map
@@ -71,9 +73,11 @@
   (set-syntax-table isar-goal-mode-syntax-table)
   (use-local-map isar-goal-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(isar-goal-font-lock-keywords))
+  (unicode-tokens-configure)
   (setq major-mode 'isar-goal-mode)
   (setq isar-goal-name "isar-goal")
   (setq mode-name "Isar-goal")
+  (unicode-tokens-mode 1)
   (run-hooks 'isar-goal-mode-hook))
 
 ;;spacemacs specific function

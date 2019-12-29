@@ -31,12 +31,13 @@
     "have" "using" "Proof" "outline" "with" "cases") t))
 
 (defconst isar-goal-font-lock-keywords-1
-  (list (cons (concat "\\<" isar-goal-outer-keyword "\\>") 'font-lock-builtin-face)
-	(cons (concat "\\<" isar-goal-inner-keyword "\\>") 'font-lock-constant-face)
-	(cons (concat "\\<" isar-goal-tactics "\\>") 'font-lock-variable-name-face)
-	(cons (concat "\\<" isar-goal-most-outer-keyword "\\>") 'font-lock-preprocessor-face)
-	(cons (concat "\\<" isar-goal-minor "\\>") 'font-lock-type-face)
-	))
+  (list
+   ;; (cons (concat "\\<" isar-goal-outer-keyword "\\>") 'font-lock-builtin-face)
+   ;; 	(cons (concat "\\<" isar-goal-inner-keyword "\\>") 'font-lock-constant-face)
+   ;; 	(cons (concat "\\<" isar-goal-tactics "\\>") 'font-lock-variable-name-face)
+   ;; 	(cons (concat "\\<" isar-goal-most-outer-keyword "\\>") 'font-lock-preprocessor-face)
+   ;; 	(cons (concat "\\<" isar-goal-minor "\\>") 'font-lock-type-face)
+   ))
 
 
 (defvar isar-goal-font-lock-keywords isar-goal-font-lock-keywords-1

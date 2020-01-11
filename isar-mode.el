@@ -400,7 +400,7 @@
              (intern (concat "isar-" (symbol-name var))))))
   (unicode-tokens-initialise))
 
-
+;;;###autoload
 (defun isar-mode ()
   "Major mode for editing isar files"
   (interactive)

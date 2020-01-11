@@ -100,6 +100,7 @@
   st)
   "Syntax table for isar-goal-mode")
 
+;;;###autoload
 (defun isar-goal-mode ()
   "Major mode for editing isar files"
   (interactive)

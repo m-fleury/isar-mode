@@ -38,7 +38,7 @@
 (defvar isar-mode-hook nil)
 
 (defvar isar-mode-map
-  ()
+  (make-sparse-keymap)
   "Keymap for isar major mode")
 
 ;;;###autoload
@@ -404,6 +404,7 @@
   (interactive)
   (kill-all-local-variables)
   (set-syntax-table isar-mode-syntax-table)
+  (set-keymap-parent isar-mode-map prog-mode-map)
   (use-local-map isar-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(isar-font-lock-keywords))
   (set (make-local-variable 'syntax-propertize-function)

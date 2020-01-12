@@ -4,8 +4,8 @@
 ;; URL: https://bitbucket.org/zmaths/isabelle2019-vsce/
 
 ;; Keywords: lisp
-;; Version: 0
-;; Package-Requires: ((emacs "25.1") (isar-mode "0"))
+;; Version: 0.1
+;; Package-Requires: ((emacs "25.1") (isar-mode "0.1"))
 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -108,7 +108,7 @@
   (set-syntax-table isar-goal-mode-syntax-table)
   (use-local-map isar-goal-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(isar-goal-font-lock-keywords))
-  (unicode-tokens-configure)
+  (isar-unicode-tokens-configure)
   (setq major-mode 'isar-goal-mode)
   (setq isar-goal-name "isar-goal")
   (setq mode-name "Isar-goal")
@@ -119,4 +119,4 @@
 (setq spacemacs-jump-handlers-isar-goal-mode nil)
 
 (provide 'isar-goal-mode)
-;;; isar-mode.el ends here
+;;; isar-goal-mode.el ends here

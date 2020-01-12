@@ -4,8 +4,8 @@
 ;; URL: https://bitbucket.org/zmaths/isabelle2019-vsce/
 
 ;; Keywords: lisp
-;; Version: 0
-;; Package-Requires: ((emacs "25.1") (lsp-mode "6.0"))
+;; Version: 0.1
+;; Package-Requires: ((emacs "25.1"))
 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -352,8 +352,7 @@
 	(cons (concat "\\<" isar-inner-keyword "\\>") 'font-lock-constant-face)
 	(cons (concat "\\<" isar-tactics "\\>") 'font-lock-variable-name-face)
 	(cons (concat "\\<" isar-most-outer-keyword "\\>") 'font-lock-preprocessor-face)
-	(cons (concat "\\<" isar-minor "\\>") 'font-lock-type-face)
-	))
+	(cons (concat "\\<" isar-minor "\\>") 'font-lock-type-face)))
 
 
 (defvar isar-font-lock-keywords isar-font-lock-keywords-1
@@ -388,11 +387,10 @@
   (funcall
    (syntax-propertize-rules
     ("\\((\\)\\(\\*\\)\\()\\)" ;; (*) are not opening comments
-     (1 "w"))
-    )
+     (1 "w")))
    start end))
 
-(defun unicode-tokens-configure ()
+(defun isar-unicode-tokens-configure ()
   "Set the Unicode Tokens table and initialise."
   (dolist (var unicode-tokens-configuration-variables)
     (if (boundp (intern (concat "isar-" (symbol-name var))))
@@ -410,7 +408,7 @@
   (set (make-local-variable 'font-lock-defaults) '(isar-font-lock-keywords))
   (set (make-local-variable 'syntax-propertize-function)
         #'isar-syntax-propertize)
-  (unicode-tokens-configure)
+  (isar-unicode-tokens-configure)
   (setq major-mode 'isar-mode)
   (setq isar-name "isar")
   (setq mode-name "Isar")

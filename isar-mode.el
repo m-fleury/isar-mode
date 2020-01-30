@@ -413,6 +413,10 @@
   (setq major-mode 'isar-mode)
   (setq isar-name "isar")
   (setq mode-name "Isar")
+  (setq-local comment-start "(* ")
+  (setq-local comment-end " *)")
+  (setq-local comment-start-skip "(\\*+[ \t]*")
+  (setq-local comment-style 'multi-line)
   (unicode-tokens-mode 1)
   (run-hooks 'isar-mode-hook))
 

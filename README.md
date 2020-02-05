@@ -17,3 +17,8 @@ If you use quelpa
 ``
 
 Otherwise clone the repo and add it to the load path.
+
+
+# History
+
+The mode started as a fork of ([simp-isar-mode](https://github.com/agomezl/simp-isar-mode)), but later changed as most of the syntax highlighting is provided by Isabelle's LSP server.

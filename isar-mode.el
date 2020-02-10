@@ -398,6 +398,9 @@
              (intern (concat "isar-" (symbol-name var))))))
   (unicode-tokens-initialise))
 
+(defvar isar-name "isar"
+  "Name of isar mode.")
+
 ;;;###autoload
 (defun isar-mode ()
   "Major mode for editing isar files"
@@ -411,7 +414,6 @@
         #'isar-syntax-propertize)
   (isar-unicode-tokens-configure)
   (setq major-mode 'isar-mode)
-  (setq isar-name "isar")
   (setq mode-name "Isar")
   (setq-local comment-start "(* ")
   (setq-local comment-end " *)")

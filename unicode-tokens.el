@@ -41,7 +41,6 @@
 ;;; Code:
 ;;
 
-(require 'cl)
 (require 'quail)
 
 ;; Emacs <24 compatibility
@@ -68,7 +67,7 @@
   (customize-set-variable 'unicode-tokens-add-help-echo
                           (not unicode-tokens-add-help-echo))
   ;; NB: approximate, should refontify all...
-  (font-lock-fontify-buffer))
+  (font-lock-flush))
 
 ;;
 ;; Variables that should be set by client modes
@@ -457,7 +456,7 @@ This function also initialises the important tables for the mode."
 The check is with `char-displayable-p'."
   (cond
    ((stringp comp)
-    (reduce (lambda (x y) (and x (char-displayable-p y)))
+    (cl-reduce (lambda (x y) (and x (char-displayable-p y)))
             comp
             :initial-value t))
    ((characterp comp)
@@ -514,7 +513,7 @@ The face property is set to the :family and :slant attriubutes taken from
                                             (car props) (cadr props))
             (setq props (cddr props)))))
     (unless (or unicode-tokens-show-symbols
-                (intersection unicode-tokens-fonts propsyms))
+                (cl-intersection unicode-tokens-fonts propsyms))
       (font-lock-append-text-property
        start end 'face
        ;; just use family and slant to enhance merging with other faces
@@ -676,7 +675,7 @@ Calculated from `unicode-tokens-token-name-alist' and
 `unicode-tokens-shortcut-alist'."
   (let ((unicode-tokens-quail-define-rules
          (list 'quail-define-rules)))
-    (let ((ulist (copy-list unicode-tokens-shortcut-alist))
+    (let ((ulist (cl-copy-list unicode-tokens-shortcut-alist))
           ustring shortcut)
       (setq ulist (sort ulist 'unicode-tokens-map-ordering))
       (while ulist

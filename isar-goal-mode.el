@@ -37,7 +37,7 @@
 
 (defvar isar-goal-mode-map
   ()
-  "Keymap for isar major mode")
+  "Keymap for isar major mode.")
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("*isar-output*" . isar-goal-mode))
@@ -100,6 +100,9 @@
   st)
   "Syntax table for isar-goal-mode")
 
+(defvar isar-goal-name "isar-goal"
+  "Name of isar mode.")
+
 ;;;###autoload
 (defun isar-goal-mode ()
   "Major mode for editing isar files"
@@ -110,7 +113,6 @@
   (set (make-local-variable 'font-lock-defaults) '(isar-goal-font-lock-keywords))
   (isar-unicode-tokens-configure)
   (setq major-mode 'isar-goal-mode)
-  (setq isar-goal-name "isar-goal")
   (setq mode-name "Isar-goal")
   (unicode-tokens-mode 1)
   (run-hooks 'isar-goal-mode-hook))

@@ -12,8 +12,6 @@
 ;;
 
 
-(require 'cl)
-
 (declare-function isar-markup-ml "isar")
 
 ;;
@@ -64,6 +62,7 @@
     ("Italic" "italic" italic))
   "Control character tokens for Isabelle."
   :group 'isabelle-tokens
+  :type '(list string string symbol)
   :set 'isar-set-and-restart-tokens)
 
 (defcustom isar-control-regions
@@ -86,6 +85,7 @@
     )
   "Control sequence tokens for Isabelle."
   :group 'isabelle-tokens
+  :type '(list string string symbol)
   :set 'isar-set-and-restart-tokens)
 
 ;;
@@ -649,7 +649,7 @@ tokens."
   :set 'isar-set-and-restart-tokens)
 
 (defun isar-map-letters (f1 f2 &rest symbs)
-  (loop for x below 26
+  (cl-loop for x below 26
         for c = (+ 65 x)
         collect
         (cons (funcall f1 c) (cons (funcall f2 c) symbs))))

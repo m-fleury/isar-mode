@@ -100,6 +100,18 @@
   st)
   "Syntax table for isar-goal-mode")
 
+
+(defun isar-goal-syntax-propertize (start end)
+  "Fix of syntax highlighting.
+
+In Isar, `(*)' does not start a compent but is the multiplication sign."
+  (goto-char start)
+  (funcall
+   (syntax-propertize-rules
+    ("\\((\\)\\(\\*\\)\\()\\)" ;; (*) are not opening comments
+     (1 "w")))
+   start end))
+
 (defvar isar-goal-name "isar-goal"
   "Name of isar mode.")
 
@@ -112,6 +124,8 @@
   (use-local-map isar-goal-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(isar-goal-font-lock-keywords))
   (isar-unicode-tokens-configure)
+  (set (make-local-variable 'syntax-propertize-function)
+       #'isar-goal-syntax-propertize)
   (setq major-mode 'isar-goal-mode)
   (setq mode-name "Isar-goal")
   (unicode-tokens-mode 1)

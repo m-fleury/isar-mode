@@ -402,7 +402,7 @@
   "Name of isar mode.")
 
 ;;;###autoload
-(defun isar-mode ()
+(define-derived-mode isar-mode prog-mode isar-name
   "Major mode for editing isar files"
   (interactive)
   (kill-all-local-variables)

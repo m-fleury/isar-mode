@@ -210,6 +210,7 @@
     "print_theory"
     "print_trans_rules"
     "print_translation"
+    "proposition"
     "proof"
     "prop"
     "pwd"

@@ -519,7 +519,7 @@
     ("^bold" "❙")
     ("^file" "🗏")
     ("^dir" "🗀")
-    ("^term" "term")
+    ("^term" "⬣")
     ("^typ" "typ")
     ("^text" "text")
     ("^latex" "latex")

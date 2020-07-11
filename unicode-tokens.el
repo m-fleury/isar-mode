@@ -323,8 +323,12 @@ This is used for an approximate reverse mapping, see `unicode-tokens-paste'.")
 ;;
 
 (defconst unicode-tokens-fontsymb-properties
-  '((sub          "Lower"         (display (raise -0.4)))
-    (sup          "Raise"         (display (raise 0.4)))
+  `((sub          "Lower"         ,(if (display-graphic-p)
+				      '(display (raise -0.4))
+				    '(face (:weight ultra-condensed :height 0.8 :slant reverse-italic :foreground "LightSalmon4"))))
+    (sup          "Raise"         ,(if (display-graphic-p)
+				      '(display (raise 0.4))
+				    '(face (:weight ultra-condensed :height 0.8 :slant italic :foreground "LightSalmon4")))) ;;(display (raise 0.4))
     (bold         "Bold"          (face (:weight bold)))
     (italic       "Italic"        (face (:slant italic)))
     (big          "Bigger"        (face (:height 1.5)))

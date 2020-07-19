@@ -1497,7 +1497,7 @@ Commands available are:
     (setq evil-escape-inhibit t)))
 
 (defun isar-quail-deinhibit-evil-escape (&optional _)
-  (run-with-timer 0 nil (lambda () ((when (featurep 'evil-escape) (setq evil-escape-inhibit nil))))))
+  (run-with-timer 0 nil (lambda () (when (featurep 'evil-escape) (setq evil-escape-inhibit nil)))))
 
 ;; (advice-add 'quail-update-translation
 ;;             :before #'isar-quail-inhibit-evil-escape)

@@ -167,6 +167,7 @@
     "normal_form"
     "notation"
     "notepad"
+    "obtains"
     "overloading"
     "paragraph"
     "subparagraph"

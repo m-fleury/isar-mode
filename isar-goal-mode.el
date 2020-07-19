@@ -5,7 +5,7 @@
 
 ;; Keywords: lisp
 ;; Version: 0.1
-;; Package-Requires: ((emacs "25.1") (isar-mode "0.1"))
+;; Package-Requires: ((emacs "25.1"))
 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal

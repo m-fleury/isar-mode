@@ -428,10 +428,10 @@ This function also initialises the important tables for the mode."
     ;; hairy logic based on Coq-style vs Isabelle-style configs
     (if (string= "" (format unicode-tokens-token-format ""))
         ;; no special token format, parse separate words/symbols
-        (let* ((tokextra (remove* "^\\(?:\\sw\\|\\s_\\)+$" toks :test 'string-match))
+        (let* ((tokextra (cl-remove "^\\(?:\\sw\\|\\s_\\)+$" toks :test 'string-match))
                (toksymbwrd (cl-set-difference toks tokextra))
                ;; indentifier that are not pure words
-               (toksymb (remove* "^\\(?:\\sw\\)+$" toksymbwrd :test 'string-match))
+               (toksymb (cl-remove "^\\(?:\\sw\\)+$" toksymbwrd :test 'string-match))
                ;; pure words
                (tokwrd (cl-set-difference toksymbwrd toksymb))
                (idorop
@@ -1112,7 +1112,9 @@ Commands available are:
   :init-value nil
   :lighter " Utoks"
   :group 'unicode-tokens
-  (let ((flks (get 'unicode-tokens-font-lock-keywords major-mode)))
+  (let ((flks (get 'unicode-tokens-font-lock-keywords major-mode))
+	maths-menu-filter-predicate
+	maths-menu-tokenise-insert)
     (when unicode-tokens-mode
       (unless flks
         (setq flks (unicode-tokens-initialise)))
@@ -1491,11 +1493,11 @@ Commands available are:
 
 ;; prevents evil-escape to be captured as commands by quail in evil-mode
 (defun isar-quail-inhibit-evil-escape (&optional _)
-  (when (fboundp 'evil-escape-inhibit)
+  (when (featurep 'evil-escape)
     (setq evil-escape-inhibit t)))
 
 (defun isar-quail-deinhibit-evil-escape (&optional _)
-  (run-with-timer 0 nil (lambda () (setq evil-escape-inhibit nil))))
+  (run-with-timer 0 nil (lambda () ((when (featurep 'evil-escape) (setq evil-escape-inhibit nil))))))
 
 ;; (advice-add 'quail-update-translation
 ;;             :before #'isar-quail-inhibit-evil-escape)

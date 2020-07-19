@@ -847,6 +847,8 @@ See `unicode-tokens-shortcut-alist'."
 ;;
 ;; prover symbol support
 ;;
+(defvar proof-tokens-activate-command nil "Function with unknow effect")
+(defvar proof-tokens-deactivate-command nil "Function with unknow effect")
 
 (eval-after-load "isar"
   '(setq

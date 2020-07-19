@@ -405,7 +405,6 @@
 ;;;###autoload
 (define-derived-mode isar-mode prog-mode isar-name
   "Major mode for editing isar files"
-  (interactive)
   (kill-all-local-variables)
   (set-syntax-table isar-mode-syntax-table)
   (set-keymap-parent isar-mode-map prog-mode-map)

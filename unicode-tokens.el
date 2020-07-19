@@ -429,11 +429,11 @@ This function also initialises the important tables for the mode."
     (if (string= "" (format unicode-tokens-token-format ""))
         ;; no special token format, parse separate words/symbols
         (let* ((tokextra (remove* "^\\(?:\\sw\\|\\s_\\)+$" toks :test 'string-match))
-               (toksymbwrd (set-difference toks tokextra))
+               (toksymbwrd (cl-set-difference toks tokextra))
                ;; indentifier that are not pure words
                (toksymb (remove* "^\\(?:\\sw\\)+$" toksymbwrd :test 'string-match))
                ;; pure words
-               (tokwrd (set-difference toksymbwrd toksymb))
+               (tokwrd (cl-set-difference toksymbwrd toksymb))
                (idorop
                 (concat "\\(\\_<"
                         (regexp-opt toksymb)
@@ -577,7 +577,7 @@ Optional argument OBJECT is the string or buffer containing the text."
   (setq unicode-tokens-show-symbols
         (if (null arg) (not unicode-tokens-show-symbols)
           (> (prefix-numeric-value arg) 0)))
-  (font-lock-fontify-buffer))
+  (font-lock-ensure))
 
 (defun unicode-tokens-symbs-to-props (symbs &optional facenil)
   "Turn the property name list SYMBS into a list of text properties.
@@ -713,7 +713,7 @@ Available annotations chosen from `unicode-tokens-control-regions'."
                         "Annotate region with: "
                         unicode-tokens-control-regions nil
                         'requirematch))))
-  (assert (assoc name unicode-tokens-control-regions))
+  (cl-assert (assoc name unicode-tokens-control-regions))
   (let* ((entry (assoc name unicode-tokens-control-regions))
          (beg   (region-beginning))
          (end   (region-end))
@@ -735,7 +735,7 @@ Available annotations chosen from `unicode-tokens-control-regions'."
                       "Insert control symbol: "
                       unicode-tokens-control-characters
                       nil 'requirematch)))
-  (assert (assoc name unicode-tokens-control-characters))
+  (cl-assert (assoc name unicode-tokens-control-characters))
   (insert (format unicode-tokens-control-char-format
                   (cadr (assoc name unicode-tokens-control-characters)))))
 
@@ -832,7 +832,7 @@ but multiple characters in the underlying buffer."
             (error "Cannot find token before point"))
           (when token
             (let* ((tokennumber
-                    (search (list token) unicode-tokens-token-list :test 'equal))
+                    (cl-search (list token) unicode-tokens-token-list :test 'equal))
                    (numtoks
                     (hash-table-count unicode-tokens-hash-table))
                    (newtok
@@ -942,7 +942,7 @@ Starts from point."
                              'face
                              'header-line))
             (insert " "))
-          (incf count)
+          (cl-incf count)
           (if (null toks)
               (insert " ")
             (insert-text-button
@@ -1044,7 +1044,7 @@ tokenised symbols."
   (setq unicode-tokens-highlight-unicode
         (not unicode-tokens-highlight-unicode))
   (unicode-tokens-highlight-unicode-setkeywords)
-  (font-lock-fontify-buffer))
+  (font-lock-ensure))
 
 (defun unicode-tokens-highlight-unicode-setkeywords ()
   "Adjust font lock keywords according to variable `unicode-tokens-highlight-unicode'."
@@ -1142,7 +1142,7 @@ Commands available are:
 
       (unicode-tokens-highlight-unicode-setkeywords)
 
-      (font-lock-fontify-buffer)
+      (font-lock-ensure)
 
       ;; experimental: this may be rude for non-nil standard tables
       (setq buffer-display-table unicode-tokens-display-table)
@@ -1169,7 +1169,7 @@ Commands available are:
         (setq font-lock-extra-managed-props
               (get 'font-lock-extra-managed-props major-mode))
         (setq font-lock-set-defaults nil) ; force font-lock-set-defaults to reinit
-        (font-lock-fontify-buffer)
+        (font-lock-ensure)
         (set-input-method nil))
 
       ;; experimental: this may be rude for non-nil standard tables
@@ -1268,7 +1268,7 @@ Commands available are:
       (and (display-graphic-p f)
            (dolist (w (window-list f))
              (with-current-buffer (window-buffer w)
-               (when font-lock-mode (font-lock-fontify-buffer))))))))
+               (when font-lock-mode (font-lock-ensure))))))))
 
 ;; based on mouse-set-font from mouse.el in Emacs 22.2.1
 (defun unicode-tokens-mouse-set-font ()
@@ -1293,7 +1293,7 @@ Commands available are:
   (let ((facevar (unicode-tokens-face-font-sym fontsym)))
     (unicode-tokens-set-font-var facevar)
     (unicode-tokens-initialise)
-    (font-lock-fontify-buffer)))
+    (font-lock-ensure)))
 
 ;;
 ;; interface to custom
@@ -1491,7 +1491,8 @@ Commands available are:
 
 ;; prevents evil-escape to be captured as commands by quail in evil-mode
 (defun isar-quail-inhibit-evil-escape (&optional _)
-  (setq evil-escape-inhibit t))
+  (when (fboundp 'evil-escape-inhibit)
+    (setq evil-escape-inhibit t)))
 
 (defun isar-quail-deinhibit-evil-escape (&optional _)
   (run-with-timer 0 nil (lambda () (setq evil-escape-inhibit nil))))

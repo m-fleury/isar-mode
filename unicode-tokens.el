@@ -200,8 +200,8 @@ and (match-string 2) has the display control applied.")
   "Initialise the configuration variables by copying from variable names.
 Each configuration variable may be set directly or indirectly by client;
 modes an indirect setting is made by this function from a variable named
-<setting>-variable, e.g., `unicode-tokens-token-symbol-map'
-will be initialised from `unicode-tokens-token-symbol-map-variable',
+<setting>-variable, e.g., unicode-tokens-token-symbol-map
+will be initialised from unicode-tokens-token-symbol-map-variable,
 if it is bound; it should be the name of a variable."
   (dolist (sym unicode-tokens-configuration-variables)
     (let ((var (unicode-tokens-config-var sym)))

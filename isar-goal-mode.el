@@ -132,7 +132,8 @@ In Isar, `(*)' does not start a compent but is the multiplication sign."
   (run-hooks 'isar-goal-mode-hook))
 
 ;;spacemacs specific function
-(setq spacemacs-jump-handlers-isar-goal-mode nil)
+(when (boundp 'spacemacs-jump-handlers-isar-goal-mode)
+  (setq spacemacs-jump-handlers-isar-goal-mode nil))
 
 (provide 'isar-goal-mode)
 ;;; isar-goal-mode.el ends here

@@ -46,21 +46,22 @@
 
 (defvar isar-most-outer-keyword
   (regexp-opt
-   '("theory"
-     "imports"
-     "begin"
+   '("begin"
+     "do"
      "end"
-     "do")))
+     "imports"
+     "theory"
+     )))
 
 (defvar isar-outer-keyword
   (regexp-opt '(
-    "ML_file"
+    "ML"
     "ML_command"
+    "ML_file"
     "ML_prf"
     "ML_val"
-    "ML"
-    "assumes"
     "abbreviation"
+    "assumes"
     "ax_specification"
     "axiomatization"
     "axioms"
@@ -92,8 +93,8 @@
     "constdefs"
     "consts"
     "consts_code"
-    "corollary"
     "context"
+    "corollary"
     "cpodef"
     "datatype"
     "declaration"
@@ -170,7 +171,6 @@
     "obtains"
     "overloading"
     "paragraph"
-    "subparagraph"
     "parse_ast_translation"
     "parse_translation"
     "pcpodef"
@@ -211,9 +211,9 @@
     "print_theory"
     "print_trans_rules"
     "print_translation"
-    "proposition"
     "proof"
     "prop"
+    "proposition"
     "pwd"
     "qed"
     "quickcheck"
@@ -249,6 +249,7 @@
     "statespace"
     "subclass"
     "sublocale"
+    "subparagraph"
     "subsect"
     "subsection"
     "subsubsect"
@@ -270,12 +271,12 @@
     "txt_raw"
     "typ"
     "type_notation"
+    "type_synonym"
     "typed_print_translation"
     "typedecl"
     "typedef"
     "types"
     "types_code"
-    "type_synonym"
     "undo"
     "undos_proof"
     "unused_thms"
@@ -424,7 +425,8 @@
   (run-hooks 'isar-mode-hook))
 
 ;;spacemacs specific function
-(setq spacemacs-jump-handlers-isar-mode nil)
+(when (boundp 'spacemacs-jump-handlers-isar-mode)
+  (setq spacemacs-jump-handlers-isar-mode nil))
 
 (provide 'isar-mode)
 

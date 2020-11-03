@@ -11,7 +11,7 @@
 ;; variable for documentation.
 ;;
 
-
+(require 'unicode-tokens)
 (declare-function isar-markup-ml "isar")
 
 ;;

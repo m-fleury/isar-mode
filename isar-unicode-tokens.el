@@ -797,6 +797,8 @@ For Isabelle, the token TOKNAME is made into the token \\<TOKNAME>."
     ("./" . "\\<Down>")
     ;; extra misc, switch them off if you don't like them
     ;("|>" . "\\<triangleright>") ; clashes with ML parsing combinator
+    ("«" . "\\<open>")
+    ("»" . "\\<close>")
     ("<|" . "\\<triangleleft>"))
   "Shortcut key sequence table for symbol tokens input.
 See `unicode-tokens-shortcut-alist'."

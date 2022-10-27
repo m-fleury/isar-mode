@@ -1112,9 +1112,7 @@ Commands available are:
   :init-value nil
   :lighter " Utoks"
   :group 'unicode-tokens
-  (let ((flks (get 'unicode-tokens-font-lock-keywords major-mode))
-	maths-menu-filter-predicate
-	maths-menu-tokenise-insert)
+  (let ((flks (get 'unicode-tokens-font-lock-keywords major-mode)))
     (when unicode-tokens-mode
       (unless flks
         (setq flks (unicode-tokens-initialise)))
@@ -1150,17 +1148,7 @@ Commands available are:
       (setq buffer-display-table unicode-tokens-display-table)
 
       (if unicode-tokens-use-shortcuts
-          (set-input-method "Unicode tokens"))
-
-      ;; adjust maths menu to insert tokens
-      (set (make-local-variable 'maths-menu-filter-predicate)
-           (lambda (uchar) (gethash (char-to-string uchar)
-                                    unicode-tokens-uchar-hash-table)))
-      (set (make-local-variable 'maths-menu-tokenise-insert)
-           (lambda (uchar)
-             (unicode-tokens-insert-token
-              (gethash (char-to-string uchar)
-                       unicode-tokens-uchar-hash-table)))))
+          (set-input-method "Unicode tokens")))
 
     (when (not unicode-tokens-mode)
 
@@ -1176,10 +1164,7 @@ Commands available are:
 
       ;; experimental: this may be rude for non-nil standard tables
       (setq buffer-display-table nil)
-
-      ;; Remove hooks from maths menu
-      (kill-local-variable 'maths-menu-filter-predicate)
-      (kill-local-variable 'maths-menu-tokenise-insert))))
+      )))
 
 
 ;;

@@ -414,15 +414,15 @@
   (set (make-local-variable 'font-lock-defaults) '(isar-font-lock-keywords))
   (set (make-local-variable 'syntax-propertize-function)
         #'isar-syntax-propertize)
-  (isar-unicode-tokens-configure)
   (setq major-mode 'isar-mode)
   (setq mode-name "Isar")
   (setq-local comment-start "(* ")
   (setq-local comment-end " *)")
   (setq-local comment-start-skip "(\\*+[ \t]*")
   (setq-local comment-style 'multi-line)
-  (unicode-tokens-mode 1)
-  (run-hooks 'isar-mode-hook))
+  (isar-unicode-tokens-configure)
+  (run-hooks 'isar-mode-hook)
+  (unicode-tokens-mode 1))
 
 ;;spacemacs specific function
 (when (boundp 'spacemacs-jump-handlers-isar-mode)

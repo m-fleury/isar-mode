@@ -406,6 +406,31 @@
 	         do (define-key isar-mode-map (kbd beautified) (format "\\<%s>" token)))
 )
 
+;; provided by Ghilain https://github.com/m-fleury/isabelle-emacs/issues/83
+(defun isar-unicodify-region-or-buffer ()
+  "Open a view of the active region (or the whole buffer if none) using true Unicode tokens."
+  (interactive)
+  (let* ((range (if (use-region-p) (list (region-beginning) (region-end)) (list nil nil)))
+         (start (car range))
+         (end (cadr range))
+         ;; Register all the existing symbols to be replaced.
+         (symbs (append isar-extended-symbols-tokens isar-symbols-tokens isar-modifier-symbols-tokens))
+         (buf (generate-new-buffer (format "%s-unicode" (buffer-name)))))
+    ;; Copy the selected region (or the whole buffer) into `buf'.
+    (insert-into-buffer buf start end)
+    ;; Switch to the (soon to be) beautiful buffer.
+    (switch-to-buffer buf)
+    ;; Now replace Isabelle sequences in `buf' by actual Unicode symbols.
+    (setq case-fold-search nil)
+    (mapc
+     (lambda (x)
+       (goto-char (point-max))
+       (while (re-search-backward (regexp-quote (format isar-token-format (car x))) nil t)
+         (replace-match (cadr x) nil t)))
+     symbs)
+    ;; And this should be it!
+  ))
+
 (defvar isar-name "isar"
   "Name of isar mode.")
 

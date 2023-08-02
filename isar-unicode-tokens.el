@@ -648,6 +648,28 @@ tokens."
   :group 'isabelle-tokens
   :set 'isar-set-and-restart-tokens)
 
+(defcustom isar-modifier-symbols-tokens
+  '(("^sub" "⇩")
+    ("^sup" "⇧")
+    ("^bsub" "⇘")
+    ("^esub" "⇙")
+    ("^bsup" "⇗")
+    ("^esup" "⇖")
+    ("zero" "𝟎")
+    ("one" "𝟏")
+    ("two" "𝟐")
+    ("three" "𝟑")
+    ("four" "𝟒")
+    ("five" "𝟓")
+    ("six" "𝟔")
+    ("seven" "𝟕")
+    ("eight" "𝟖")
+    ("nine" "𝟗"))
+  "Some various symbols used for Unicode printing. Most should be either invisible or styled (e.g. bold)."
+  :type 'unicode-tokens-token-symbol-map
+  :group 'isabelle-tokens
+  :set 'isar-set-and-restart-tokens)
+
 (defun isar-map-letters (f1 f2 &rest symbs)
   (cl-loop for x below 26
         for c = (+ 65 x)

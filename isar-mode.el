@@ -36,6 +36,7 @@
 
 
 (defvar isar-mode-hook nil)
+(defcustom isar-mode-remove-utf8-when-saving "Replace the '‹' by the Isabelle encoding." t)
 
 (defvar isar-mode-map
   (make-sparse-keymap)
@@ -434,6 +435,21 @@
 (defvar isar-name "isar"
   "Name of isar mode.")
 
+(defun isar-replace-all-utf8-by-encoding ()
+  "Remove the accidentally entered utf8 by the corresponding Isabelle encoding"
+  (interactive)
+  (if isar-mode-remove-utf8-when-saving
+      (dolist (symbolpair (append
+			   isar-symbols-tokens
+			   isar-extended-symbols-tokens))
+	(let* ((symbol (car symbolpair))
+	       (utf8-symbol (cadr symbolpair)))
+	  ;;(message "%s %s" utf8-symbol symbol)
+	  (goto-char (point-min))
+	  (while (re-search-forward utf8-symbol nil t)
+	    (replace-match (concat "\\\\<" symbol ">") nil nil))))))
+
+
 ;;;###autoload
 (define-derived-mode isar-mode prog-mode isar-name
   "Major mode for editing isar files"
@@ -452,6 +468,7 @@
   (setq-local comment-style 'multi-line)
   (isar-unicode-tokens-configure)
   (run-hooks 'isar-mode-hook)
+  (add-hook 'after-save-hook #'isar-replace-all-utf8-by-encoding nil t)
   (unicode-tokens-mode 1))
 
 ;;spacemacs specific function

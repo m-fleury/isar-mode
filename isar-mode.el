@@ -438,7 +438,8 @@
 (defun isar-replace-all-utf8-by-encoding ()
   "Remove the accidentally entered utf8 by the corresponding Isabelle encoding"
   (interactive)
-  (if isar-mode-remove-utf8-when-saving
+  (save-excursion
+   (if isar-mode-remove-utf8-when-saving
       (dolist (symbolpair (append
 			   isar-symbols-tokens
 			   isar-extended-symbols-tokens))
@@ -447,7 +448,7 @@
 	  ;;(message "%s %s" utf8-symbol symbol)
 	  (goto-char (point-min))
 	  (while (re-search-forward utf8-symbol nil t)
-	    (replace-match (concat "\\\\<" symbol ">") nil nil))))))
+	    (replace-match (concat "\\\\<" symbol ">") nil nil)))))))
 
 
 ;;;###autoload
